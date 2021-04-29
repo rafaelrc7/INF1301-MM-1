@@ -3,25 +3,36 @@
 from model import game_rules
 import random
 
-random.seed(0) # 0 - [6, 6, 0, 4, 7, 6]
+header = """
+ __  __           _                      _           _
+|  \/  | __ _ ___| |_ ___ _ __ _ __ ___ (_)_ __   __| |
+| |\/| |/ _` / __| __/ _ \ '__| '_ ` _ \| | '_ \ / _` |
+| |  | | (_| \__ \ ||  __/ |  | | | | | | | | | | (_| |
+|_|  |_|\__,_|___/\__\___|_|  |_| |_| |_|_|_| |_|\__,_|
 
-game_rules.def_dificuldade(0)
-game_rules.gen_senha()
+Para iniciar o jogo escolha uma dificuldade (0, 1 ou 2) ou digite -1 para sair.
+"""
 
-tent = [6, 4, 6, 4]
+while True:
+    print(header)
+    inp = int(input("> "))
+    if (inp < 0):
+        break
 
-print(tent)
+    game_rules.def_dificuldade(inp)
+    game_rules.gen_senha()
 
-resp, status = game_rules.turno(tent)
-print(status)
+    n = game_rules.get_valorDif("pedras")
+    status = 0
 
-resp, status = game_rules.turno(tent)
-print(status)
+    while (status == 0):
+        tentativa = list(map(int,input("\nEntre sua tentativa: ").strip().split()))[:n]
+        print(game_rules.compara_tentativa(tentativa))
+        status = game_rules.testa_tentativa()
 
-resp, status = game_rules.turno(tent)
-print(status)
-
-tent = [3, 3, 0, 2]
-resp, status = game_rules.turno(tent)
-print(status)
-
+    if (status == 1):
+        print("\nParabens! Voce descobriu a senha, em %d tentativas!" % game_rules.get_tentativas())
+    else:
+        print("\nVoce falhou! Mais sorte na proxima vez!")
+ 
+    print("Senha: ", game_rules.get_sen(), "\n")

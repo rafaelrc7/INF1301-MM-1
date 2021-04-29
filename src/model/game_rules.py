@@ -1,60 +1,72 @@
-__all__ = ['def_dificuldade', 'gen_senha', 'turno']
+__all__ = ['def_dificuldade', 'gen_senha', 'compara_tentativa', 'testa_tentativa', 'get_dif', 'get_sen', 'get_valorDif', 'get_tentativas']
 
 from random import randint
 
-m_dificuldade = 0 # 0- facil; 1- medio; 2- dificil
-m_quantidade_jogadas = 0
-m_senha = []
-
 valores_dif = {
-        0: {"pedras": 4, "cores": 6, "limite": 3},
+        0: {"pedras": 4, "cores": 6, "limite": 8},
         1: {"pedras": 5, "cores": 7, "limite": 10},
         2: {"pedras": 6, "cores": 8, "limite": 12}
         }
 
 def def_dificuldade(dificuldade):
-    global m_dificuldade
-    m_dificuldade = dificuldade
+    global m_dificuldade, m_quantidade_jogadas, m_senha, m_resposta
 
+    m_dificuldade = dificuldade
+    m_quantidade_jogadas = 0
+    m_senha = []
+    m_resposta = []
+
+def get_dif():
+    global m_dificuldade
+    return m_dificuldade
+
+def get_valorDif(valor):
+    global m_dificuldade
+    return valores_dif[m_dificuldade][valor]
 
 def gen_senha():
+    global m_dificuldade, m_senha
+
     for i in range(valores_dif[m_dificuldade]["pedras"]):
         m_senha.append(randint(0, valores_dif[m_dificuldade]["cores"]-1))
 
+def get_sen():
+    global m_senha
+    return m_senha
 
 def compara_tentativa(tentativa):
-    global m_senha
-    senha = m_senha
-    resposta = []
-    ret = 0
+    global m_quantidade_jogadas, m_senha, m_resposta
+
+    senha = m_senha.copy()
+    m_resposta = []
 
     for pos, pedra in enumerate(tentativa):
             if senha[pos] == pedra:
-                resposta.append("*")
+                m_resposta.append("*")
                 senha[pos] = -1
                 tentativa[pos] = -2
 
     for pos, pedra in enumerate(tentativa):
             if pedra in senha:
-                resposta.append("#")
+                m_resposta.append("#")
                 senha[senha.index(pedra)] = -1
                 tentativa[pos] = -2
 
-    return resposta
-
-
-def turno(tentativa):
-    global m_quantidade_jogadas
-
-    ret = compara_tentativa(tentativa)
-    esta_correto = (ret == ['*']*valores_dif[m_dificuldade]["pedras"])
-
-    if esta_correto:
-        return ret, 1
-
-    if (m_quantidade_jogadas >= valores_dif[m_dificuldade]["limite"]-1):
-        return [], -1
-
     m_quantidade_jogadas += 1
 
-    return ret, esta_correto
+    return m_resposta
+
+def testa_tentativa():
+    global m_dificuldade, m_quantidade_jogadas, m_resposta
+
+    if (m_resposta == ['*']*valores_dif[m_dificuldade]["pedras"]):
+        return 1
+
+    if (m_quantidade_jogadas > valores_dif[m_dificuldade]["limite"]-1):
+        return -1
+
+    return 0;
+
+def get_tentativas():
+    global m_quantidade_jogadas
+    return m_quantidade_jogadas
