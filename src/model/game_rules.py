@@ -16,23 +16,11 @@ def def_dificuldade(dificuldade):
     m_senha = []
     m_resposta = []
 
-def get_dif():
-    global m_dificuldade
-    return m_dificuldade
-
-def get_valorDif(valor):
-    global m_dificuldade
-    return valores_dif[m_dificuldade][valor]
-
 def gen_senha():
     global m_dificuldade, m_senha
 
     for i in range(valores_dif[m_dificuldade]["pedras"]):
         m_senha.append(randint(0, valores_dif[m_dificuldade]["cores"]-1))
-
-def get_sen():
-    global m_senha
-    return m_senha
 
 def compara_tentativa(tentativa):
     global m_quantidade_jogadas, m_senha, m_resposta
@@ -67,6 +55,21 @@ def testa_tentativa():
 
     return 0;
 
+# 'Getters'
+
 def get_tentativas():
     global m_quantidade_jogadas
     return m_quantidade_jogadas
+
+def get_dif():
+    global m_dificuldade
+    return m_dificuldade
+
+def get_sen():
+    global m_senha
+    return m_senha
+
+def get_valorDif(valor):
+    global m_dificuldade
+    return valores_dif[m_dificuldade][valor]
+
