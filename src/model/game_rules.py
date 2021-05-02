@@ -2,12 +2,14 @@ __all__ = ['def_dificuldade', 'gen_senha', 'compara_tentativa', 'testa_tentativa
 
 from random import randint
 
+# Dicionário com constantes relacionadas a cada dificuldade
 valores_dif = {
         0: {"pedras": 4, "cores": 6, "limite": 8},
         1: {"pedras": 5, "cores": 7, "limite": 10},
         2: {"pedras": 6, "cores": 8, "limite": 12}
         }
 
+# Define, usando globais do módulo, a dificuldade da partida, além de reiniciar valores relacionados.
 def def_dificuldade(dificuldade):
     global m_dificuldade, m_quantidade_jogadas, m_senha, m_resposta
 
@@ -16,12 +18,14 @@ def def_dificuldade(dificuldade):
     m_senha = []
     m_resposta = []
 
+# Gera uma senha aleatoriamente, de acordo com a dificuldade definida
 def gen_senha():
     global m_dificuldade, m_senha
 
     for i in range(valores_dif[m_dificuldade]["pedras"]):
         m_senha.append(randint(0, valores_dif[m_dificuldade]["cores"]-1))
 
+# Compara a tentiva do jogador com a senha atual, retornando uma lista com as pedras resposta
 def compara_tentativa(tentativa):
     global m_quantidade_jogadas, m_senha, m_resposta
 
@@ -44,6 +48,7 @@ def compara_tentativa(tentativa):
 
     return m_resposta
 
+# Checa o estado atual do jogo, se acabbou (em vitória ou derrota) ou não
 def testa_tentativa():
     global m_dificuldade, m_quantidade_jogadas, m_resposta
 
