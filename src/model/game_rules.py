@@ -4,10 +4,10 @@ from random import randint
 
 # Dicionário com constantes relacionadas a cada dificuldade
 valores_dif = {
-        0: {"pedras": 4, "cores": 6, "limite": 8},
-        1: {"pedras": 5, "cores": 7, "limite": 10},
-        2: {"pedras": 6, "cores": 8, "limite": 12}
-        }
+    0: {"pedras": 4, "cores": 6, "limite": 8},
+    1: {"pedras": 5, "cores": 7, "limite": 10},
+    2: {"pedras": 6, "cores": 8, "limite": 12}
+}
 
 # Define, usando globais do módulo, a dificuldade da partida, além de reiniciar valores relacionados.
 def def_dificuldade(dificuldade):
@@ -33,16 +33,16 @@ def compara_tentativa(tentativa):
     m_resposta = []
 
     for pos, pedra in enumerate(tentativa):
-            if senha[pos] == pedra:
-                m_resposta.append("*")
-                senha[pos] = -1
-                tentativa[pos] = -2
+        if senha[pos] == pedra:
+            m_resposta.append("*")
+            senha[pos] = -1
+            tentativa[pos] = -2
 
     for pos, pedra in enumerate(tentativa):
-            if pedra in senha:
-                m_resposta.append("#")
-                senha[senha.index(pedra)] = -1
-                tentativa[pos] = -2
+        if pedra in senha:
+            m_resposta.append("#")
+            senha[senha.index(pedra)] = -1
+            tentativa[pos] = -2
 
     m_quantidade_jogadas += 1
 
