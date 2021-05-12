@@ -42,39 +42,39 @@ class Test_gen_senha(unittest.TestCase):
         seed(0)
 
     def test_facil(self):
-        game_rules.def_dificuldade(0);
+        game_rules.def_dificuldade(0)
         game_rules.gen_senha()
 
         self.assertEqual(len(game_rules.get_sen()), 4)
         self.assertEqual(game_rules.get_sen(), [3, 3, 0, 2])
 
-        game_rules.def_dificuldade(0);
+        game_rules.def_dificuldade(0)
         game_rules.gen_senha()
 
         self.assertEqual(len(game_rules.get_sen()), 4)
         self.assertEqual(game_rules.get_sen(), [4, 3, 3, 2])
 
     def test_medio(self):
-        game_rules.def_dificuldade(1);
+        game_rules.def_dificuldade(1)
         game_rules.gen_senha()
 
         self.assertEqual(len(game_rules.get_sen()), 5)
         self.assertEqual(game_rules.get_sen(), [6, 3, 6, 3, 0])
 
-        game_rules.def_dificuldade(1);
+        game_rules.def_dificuldade(1)
         game_rules.gen_senha()
 
         self.assertEqual(len(game_rules.get_sen()), 5)
         self.assertEqual(game_rules.get_sen(), [2, 4, 3, 3, 6])
 
     def test_dificil(self):
-        game_rules.def_dificuldade(2);
+        game_rules.def_dificuldade(2)
         game_rules.gen_senha()
 
         self.assertEqual(len(game_rules.get_sen()), 6)
         self.assertEqual(game_rules.get_sen(), [6, 6, 0, 4, 7, 6])
 
-        game_rules.def_dificuldade(2);
+        game_rules.def_dificuldade(2)
         game_rules.gen_senha()
 
         self.assertEqual(len(game_rules.get_sen()), 6)
@@ -84,7 +84,7 @@ class Test_gen_senha(unittest.TestCase):
 class Test_compara_tentativa(unittest.TestCase):
     def setUp(self):
         seed(0)
-        game_rules.def_dificuldade(2);
+        game_rules.def_dificuldade(2)
         game_rules.gen_senha()
 
     def test_tentativa_errada(self):
@@ -110,7 +110,7 @@ class Test_compara_tentativa(unittest.TestCase):
 
     def test_tentativa_correta(self):
         self.assertEqual(game_rules.compara_tentativa([6, 6, 0, 4, 7, 6]), ['*', '*', '*', '*', '*', '*'])
-        game_rules.def_dificuldade(2);
+        game_rules.def_dificuldade(2)
         game_rules.gen_senha()
         self.assertEqual(game_rules.compara_tentativa([4, 7, 5, 3, 2, 4]), ['*', '*', '*', '*', '*', '*'])
 
@@ -118,7 +118,7 @@ class Test_compara_tentativa(unittest.TestCase):
 class Test_testa_tentativa(unittest.TestCase):
     def setUp(self):
         seed(0)
-        game_rules.def_dificuldade(2);
+        game_rules.def_dificuldade(2)
         game_rules.gen_senha()
 
     def test_vitoria_primeiro_turno(self):
