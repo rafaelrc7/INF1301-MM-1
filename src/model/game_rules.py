@@ -1,4 +1,4 @@
-__all__ = ['def_dificuldade', 'gen_senha', 'compara_tentativa', 'testa_tentativa', 'get_dif', 'get_sen', 'get_valorDif', 'get_tentativas']
+__all__ = ['novo_jogo', 'def_dificuldade', 'gen_senha', 'compara_tentativa', 'testa_tentativa', 'get_dif', 'get_sen', 'get_valorDif', 'get_tentativas']
 
 from random import randint
 import json
@@ -9,6 +9,14 @@ valores_dif = {
     1: {"pedras": 5, "cores": 7, "limite": 10},
     2: {"pedras": 6, "cores": 8, "limite": 12}
 }
+
+def novo_jogo():
+    global m_dificuldade, m_quantidade_jogadas, m_senha, m_resposta, m_dados
+    m_dificuldade = None
+    m_quantidade_jogadas = None
+    m_senha = None
+    m_resposta = None
+    m_dados = None
 
 # Define, usando globais do módulo, a dificuldade da partida e reinicia valores relacionados.
 def def_dificuldade(dificuldade):
@@ -110,23 +118,24 @@ def get_valorDif(valor):
 
 # Carregar/Salvar estado do jogo
 
-def salvar (arq):
+def salvar():
     """Salva o atual estado de uma partida em um arquivo json que pode ser carregado
     para continuar de onde o jogador parou."""
     global m_dados
-    fp = open(arq+".json", "w")
-    json.dump(m_dados, fp)
-    fp.close()
+    if not m_dados is None:
+        fp = open("partida_mm.json", "w")
+        json.dump(m_dados, fp)
+        fp.close()
 
 
-def carregar (arq):
+def carregar():
     """Carrega a partida salva em um arquivo json."""
     global m_dados, m_senha, m_dificuldade, m_quantidade_jogadas
-    fp = open(arq+".json", "r")
+    fp = open("partida_mm.json", "r")
     m_dados = json.load(fp)
     fp.close()
 
+    def_dificuldade(m_dados["dificuldade"])
     m_senha = m_dados["senha"]
-    m_dificuldade = m_dados["dificuldade"]
     m_quantidade_jogadas = len(m_dados["tentativas"])
 
