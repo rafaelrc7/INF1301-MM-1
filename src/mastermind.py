@@ -7,15 +7,15 @@ from controller import event_handler
 
 def njogo_facil():
     game_rules.def_dificuldade(0)
-    draw_canvas.draw(canvas)
+    draw_canvas.draw()
 
 def njogo_medio():
     game_rules.def_dificuldade(1)
-    draw_canvas.draw(canvas)
+    draw_canvas.draw()
 
 def njogo_dificil():
     game_rules.def_dificuldade(2)
-    draw_canvas.draw(canvas)
+    draw_canvas.draw()
 
 
 root = tkinter.Tk(className="Mastermind")
@@ -25,15 +25,15 @@ root.resizable(False, False)
 game_rules.novo_jogo()
 
 canvas = tkinter.Canvas(root, bg="#c58561", width=745, height=700)
-canvas.bind('<ButtonRelease-1>', event_handler.click)
-draw_canvas.inicia()
-draw_canvas.draw(canvas)
+canvas.bind('<ButtonRelease-1>', event_handler.click_event)
+draw_canvas.inicia(canvas)
+draw_canvas.draw()
 
 menu=tkinter.Menu(root)
 
 partida=tkinter.Menu(menu)
 partida.add_command(label="Salvar", command=game_rules.salvar)
-partida.add_command(label="Carregar", command=game_rules.carregar)
+partida.add_command(label="Carregar", command=event_handler.load_event)
 
 nova_partida=tkinter.Menu(menu)
 nova_partida.add_command(label="Fácil", command=njogo_facil)

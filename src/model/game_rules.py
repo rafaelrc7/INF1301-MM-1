@@ -1,7 +1,11 @@
 __all__ = ['novo_jogo', 'def_dificuldade', 'gen_senha', 'compara_tentativa', 'testa_tentativa', 'get_dif', 'get_sen', 'get_valorDif', 'get_tentativas']
 
+m_dificuldade = m_quantidade_jogadas = m_senha = m_resposta = m_dados = 0
+
 from random import randint
 import json
+from model import game_state
+from view import draw_canvas
 
 # Dicionário com constantes relacionadas a cada dificuldade
 valores_dif = {
@@ -13,7 +17,7 @@ valores_dif = {
 def novo_jogo():
     global m_dificuldade, m_quantidade_jogadas, m_senha, m_resposta, m_dados
     m_dificuldade = None
-    m_quantidade_jogadas = None
+    m_quantidade_jogadas = -1
     m_senha = None
     m_resposta = None
     m_dados = None
@@ -24,6 +28,9 @@ def def_dificuldade(dificuldade):
     uma partida nova"""
     global m_dificuldade, m_quantidade_jogadas, m_senha, m_resposta, m_dados
 
+    game_state.get_estado()["partida"] = True
+    game_state.get_estado()["cor_selecionada"] = -1
+    game_state.get_estado()["tentativa_tmp"] = [-1, -1, -1, -1, -1, -1]
     m_dificuldade = dificuldade
     m_quantidade_jogadas = 0
     m_senha = []
@@ -130,12 +137,19 @@ def salvar():
 
 def carregar():
     """Carrega a partida salva em um arquivo json."""
-    global m_dados, m_senha, m_dificuldade, m_quantidade_jogadas
+    global m_dados, m_senha, m_resposta, m_dificuldade, m_quantidade_jogadas
     fp = open("partida_mm.json", "r")
     m_dados = json.load(fp)
     fp.close()
 
-    def_dificuldade(m_dados["dificuldade"])
+    game_state.get_estado()["partida"] = True
+    game_state.get_estado()["cor_selecionada"] = -1
+    game_state.get_estado()["tentativa_tmp"] = [-1, -1, -1, -1, -1, -1]
+    m_dificuldade = m_dados["dificuldade"]
+    m_quantidade_jogadas = 0
+    m_senha = []
+    m_resposta = []
     m_senha = m_dados["senha"]
     m_quantidade_jogadas = len(m_dados["tentativas"])
+
 
