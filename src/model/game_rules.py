@@ -33,8 +33,9 @@ def def_dificuldade(dificuldade):
     game_state.get_estado()["tentativa_tmp"] = [-1, -1, -1, -1, -1, -1]
     m_dificuldade = dificuldade
     m_quantidade_jogadas = 0
-    m_senha = []
     m_resposta = []
+
+    m_senha = []
 
     m_dados = {
         "dificuldade": dificuldade,
@@ -42,6 +43,8 @@ def def_dificuldade(dificuldade):
         "respostas": [],
         "senha": []
     }
+
+    gen_senha()
 
 
 # Gera uma senha aleatoriamente, de acordo com a dificuldade definida
