@@ -43,6 +43,7 @@ def draw():
 
                     cnv.create_oval((j*53)+65+8, (i*53)+6+10, (j*53)+65+53-10, (i*53)+6+53-10, fill=cor)
 
+    # paleta de seleção
     for i in range(2): # coluna
         for j in range(4): # linha
             x = (i*87)+507
@@ -54,5 +55,10 @@ def draw():
                     if c == game_state.get_estado()["cor_selecionada"]:
                         cnv.create_oval(x, y, x+87, y+87, fill="black")
                     cnv.create_oval(x+5, y+5, x+82, y+82, fill=m_cores[c])
+
+    if not -1 in game_state.get_estado()["tentativa_tmp"][:game_rules.get_valorDif("pedras")]:
+        cnv.create_rectangle(507, 348+42+10, 2*87+507, 348+42+87, fill='blue')
+    else:
+        cnv.create_rectangle(507, 348+42+10, 2*87+507, 348+42+87, fill='black')
 
     return

@@ -18,8 +18,8 @@ def novo_jogo():
     global m_dificuldade, m_quantidade_jogadas, m_senha, m_resposta, m_dados
     m_dificuldade = None
     m_quantidade_jogadas = -1
-    m_senha = None
-    m_resposta = None
+    m_senha = []
+    m_resposta = []
     m_dados = None
 
 # Define, usando globais do módulo, a dificuldade da partida e reinicia valores relacionados.
@@ -124,6 +124,8 @@ def get_valorDif(valor):
         "limite" -- Retorna o número máximo de tentativas
     """
     global m_dificuldade
+    if m_dificuldade is None:
+        return -1
     return valores_dif[m_dificuldade][valor]
 
 # Carregar/Salvar estado do jogo

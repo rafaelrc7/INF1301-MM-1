@@ -24,6 +24,7 @@ def click(event):
                     if x > xc and x < xc+87 and y > yc and y < yc+87 and c < game_rules.get_valorDif("cores"):
                         game_state.get_estado()["cor_selecionada"] = c
                         return
+
         yf = (11-game_rules.get_tentativas()) * 53 + 65+8
         if game_state.get_estado()["cor_selecionada"] != -1 and y > yf and y < yf+87:
             for i in range(game_rules.get_valorDif("pedras")):
@@ -31,6 +32,11 @@ def click(event):
                 if x > xf and x < xf+53:
                     game_state.get_estado()["tentativa_tmp"][i] = game_state.get_estado()["cor_selecionada"]
                     break
+
+        if not -1 in game_state.get_estado()["tentativa_tmp"][:game_rules.get_valorDif("pedras")]:
+            if x > 507 and x < 2*87+507 and y > 348+42+10 and 348+42+87:
+                game_rules.compara_tentativa(game_state.get_estado()["tentativa_tmp"][:game_rules.get_valorDif("pedras")])
+                game_state.get_estado()["tentativa_tmp"] = [-1] * 6
 
 
         if game_state.get_estado()["cor_selecionada"] != -1:
