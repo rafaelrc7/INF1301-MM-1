@@ -3,18 +3,19 @@
 import tkinter
 from view import draw_canvas
 from model import game_rules
+from model import game_state
 from controller import event_handler
 
 def njogo_facil():
-    game_rules.def_dificuldade(0)
+    game_state.nova_partida(0)
     draw_canvas.draw()
 
 def njogo_medio():
-    game_rules.def_dificuldade(1)
+    game_state.nova_partida(1)
     draw_canvas.draw()
 
 def njogo_dificil():
-    game_rules.def_dificuldade(2)
+    game_state.nova_partida(2)
     draw_canvas.draw()
 
 
@@ -22,7 +23,7 @@ root = tkinter.Tk(className="Mastermind")
 root.geometry("745x700")
 root.resizable(False, False)
 
-game_rules.novo_jogo()
+
 
 canvas = tkinter.Canvas(root, bg="#c58561", width=745, height=700)
 canvas.bind('<ButtonRelease-1>', event_handler.click_event)
