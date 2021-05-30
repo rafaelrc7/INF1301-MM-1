@@ -23,8 +23,6 @@ root = tkinter.Tk(className="Mastermind")
 root.geometry("745x700")
 root.resizable(False, False)
 
-
-
 canvas = tkinter.Canvas(root, bg="#c58561", width=745, height=700)
 canvas.bind('<ButtonRelease-1>', event_handler.click_event)
 canvas.bind('<Escape>', event_handler.esc_event)

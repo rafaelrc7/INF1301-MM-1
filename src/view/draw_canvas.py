@@ -16,6 +16,8 @@ m_cores = {
         5: "cyan",
         6: "#ff872b", # laranja
         7: "#3d1500", # marrom
+        "*": "black",
+        "#": "white"
         }
 
 def inicia(canvas):
@@ -42,6 +44,9 @@ def draw():
                         cor = m_cores[game_state.estado["tentativa_tmp"][j]]
                     else:
                         cor = m_cores[game_state.estado["tentativas"][abs(i-12)][j]]
+                        for x in range(len(game_state.estado["respostas"][abs(i-12)])):
+                            r_cor = m_cores[game_state.estado["respostas"][abs(i-12)][x]]
+                            cnv.create_oval(65+315+(x%3)*20, i*53+6+(x//3)*20, 65+335+(x%3)*20, i*53+6+(x//3)*20+20, fill=r_cor)
 
                     cnv.create_oval((j*53)+65+8, (i*53)+6+10, (j*53)+65+53-10, (i*53)+6+53-10, fill=cor)
 
