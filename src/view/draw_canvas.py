@@ -18,7 +18,7 @@ m_cores = {
         7: "#3d1500", # marrom
         "*": "black",
         "#": "white"
-        }
+}
 
 def inicia(canvas):
     global cnv
@@ -29,7 +29,7 @@ def draw():
     global cnv, m_cores
     cnv.delete("all")
     for i in range(13):
-        if i == 12-game_state.get_qtd_jogadas():
+        if i == 12-game_state.get_qtd_jogadas() and game_state.estado["partida"] > 0:
             cor = '#92522e'
         else:
             cor = ''
@@ -38,7 +38,12 @@ def draw():
         if not game_state.estado["dificuldade"] is None:
             for j in range(game_rules.get_valorDif("pedras")):
                 if i == 0 or i > 12 - game_rules.get_valorDif("limite"):
-                    if i < 12-game_state.get_qtd_jogadas():
+                    if i == 0:
+                        if game_state.estado["partida"] < 1:
+                            cor = m_cores[game_state.estado["senha"][j]]
+                        else:
+                            cor = '';
+                    elif i < 12-game_state.get_qtd_jogadas():
                         cor = ''
                     elif i == 12-game_state.get_qtd_jogadas():
                         cor = m_cores[game_state.estado["tentativa_tmp"][j]]
@@ -65,7 +70,20 @@ def draw():
 
     if not -1 in game_state.estado["tentativa_tmp"][:game_rules.get_valorDif("pedras")]:
         cnv.create_rectangle(507, 348+42+10, 2*87+507, 348+42+87, fill='blue')
+        cnv.create_text(507+87, 348+42+50, text="Próxima\ntentativa", fill="yellow",
+                font="Times 15 bold")
     else:
         cnv.create_rectangle(507, 348+42+10, 2*87+507, 348+42+87, fill='black')
+
+    if game_state.estado["partida"] < 1:
+        if game_state.estado["partida"] == -1:
+            cnv.create_text(507+87, 348+87+70, text="VOCÊ GANHOU!", fill="green",
+                    font="Times 20 bold")
+        elif game_state.estado["partida"] == -2:
+            cnv.create_text(507+87, 348+87+70, text="VOCÊ PERDEU", fill="red",
+                    font="Times 20 bold")
+
+        cnv.create_text(507+87, 348+87+120, fill="black", font="Times 12 bold",
+                text="Inicie uma partida nova ou carregue\n uma antiga na barra de menu do jogo.")
 
     return

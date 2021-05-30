@@ -20,7 +20,7 @@ def click(event):
     x=event.x
     y=event.y
 
-    if (game_state.estado["partida"]):
+    if (game_state.estado["partida"] > 0):
         if x > 507 and x < 507+2*87 and y > 42 and y < 42 + 87*4:
             for i in range(2): # coluna
                 for j in range(4): # linha
@@ -43,6 +43,7 @@ def click(event):
             if x > 507 and x < 2*87+507 and y > 348+42+10 and 348+42+87:
                 game_rules.compara_tentativa(game_state.estado["tentativa_tmp"][:game_rules.get_valorDif("pedras")])
                 game_state.estado["tentativa_tmp"] = [-1] * 6
+                game_state.estado["partida"] = game_rules.testa_tentativa()
 
 
         if game_state.estado["cor_selecionada"] != -1:

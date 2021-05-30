@@ -3,7 +3,7 @@ __all__ = ['estado', 'nova_partida', 'get_qtd_jogadas']
 from model import game_rules
 
 estado = {
-    "partida": False,
+    "partida": 0,
     "cor_selecionada": -1,
     "tentativa_tmp": [-1, -1, -1, -1, -1, -1],
     "dificuldade": None,
@@ -18,7 +18,7 @@ def nova_partida(dificuldade):
     global estado
 
     estado.update (
-        partida = True,
+        partida = 1,
         cor_selecionada = -1,
         tentativa_tmp = [-1, -1, -1, -1, -1, -1],
         dificuldade = dificuldade,

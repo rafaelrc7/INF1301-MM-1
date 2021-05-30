@@ -50,13 +50,13 @@ def compara_tentativa(tentativa):
 def testa_tentativa():
     """Testa se a partida acabou e, no caso, se o jogador perdeu ou ganhou."""
 
-    if game_state.estado["resposta"] == ['*']*valores_dif[game_state.estado["dificuldade"]]["pedras"]:
-        return 1
-
-    if game_state.game_state.get_qtd_jogadas() > valores_dif[game_state.estado["dificuldade"]]["limite"]-1:
+    if game_state.estado["respostas"][-1] == ['*']*valores_dif[game_state.estado["dificuldade"]]["pedras"]:
         return -1
 
-    return 0
+    if game_state.get_qtd_jogadas() > valores_dif[game_state.estado["dificuldade"]]["limite"]-1:
+        return -2
+
+    return 1
 
 # 'Getters'
 
@@ -90,10 +90,6 @@ def carregar():
     fp = open("partida_mm.json", "r")
     game_state.estado = json.load(fp)
     fp.close()
-
-    game_state.estado["partida"] = True
-    game_state.estado["cor_selecionada"] = -1
-    game_state.estado["tentativa_tmp"] = [-1, -1, -1, -1, -1, -1]
 
     m_resposta = []
 
