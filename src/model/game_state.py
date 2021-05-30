@@ -1,5 +1,6 @@
-__all__ = ['estado', 'nova_partida', 'get_qtd_jogadas']
+__all__ = ['estado', 'nova_partida', 'get_qtd_jogadas', 'carregar', 'salvar']
 
+import json
 from model import game_rules
 
 estado = {
@@ -32,3 +33,23 @@ def nova_partida(dificuldade):
 def get_qtd_jogadas():
     global estado
     return len(estado["tentativas"])
+
+# Carregar/Salvar estado do jogo
+
+def salvar():
+    """Salva o atual estado de uma partida em um arquivo json que pode ser carregado
+    para continuar de onde o jogador parou."""
+    global estado
+    if not estado is None:
+        fp = open("partida_mm.json", "w")
+        json.dump(estado, fp)
+        fp.close()
+
+
+def carregar():
+    """Carrega a partida salva em um arquivo json."""
+    global estado
+    fp = open("partida_mm.json", "r")
+    estado = json.load(fp)
+    fp.close()
+

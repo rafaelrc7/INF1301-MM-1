@@ -1,4 +1,4 @@
-__all__ = ["inicia", "draw"]
+__all__ = ['inicia', 'draw']
 
 from controller import event_handler
 from model import game_rules
@@ -27,14 +27,18 @@ def inicia(canvas):
 
 def draw():
     global cnv, m_cores
+
     cnv.delete("all")
+
     for i in range(13):
         if i == 12-game_state.get_qtd_jogadas() and game_state.estado["partida"] > 0:
             cor = '#92522e'
         else:
             cor = ''
+
         cnv.create_rectangle(65, (i*53)+6, 65+313, ((i+1)*53)+6, fill=cor)
         cnv.create_rectangle(65+315, (i*53)+6, 65+315+65, ((i+1)*53)+6, fill='')
+
         if not game_state.estado["dificuldade"] is None:
             for j in range(game_rules.get_valorDif("pedras")):
                 if i == 0 or i > 12 - game_rules.get_valorDif("limite"):
@@ -42,7 +46,7 @@ def draw():
                         if game_state.estado["partida"] < 1:
                             cor = m_cores[game_state.estado["senha"][j]]
                         else:
-                            cor = '';
+                            cor = ''
                     elif i < 12-game_state.get_qtd_jogadas():
                         cor = ''
                     elif i == 12-game_state.get_qtd_jogadas():
@@ -86,4 +90,3 @@ def draw():
         cnv.create_text(507+87, 348+87+120, fill="black", font="Times 12 bold",
                 text="Inicie uma partida nova ou carregue\n uma antiga na barra de menu do jogo.")
 
-    return

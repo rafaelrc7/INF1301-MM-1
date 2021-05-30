@@ -1,11 +1,7 @@
-__all__ = ['novo_jogo', 'gen_senha', 'compara_tentativa', 'testa_tentativa', 'get_valorDif']
+__all__ = ['gen_senha', 'compara_tentativa', 'testa_tentativa', 'get_valorDif']
 
 from random import randint
-import json
 from model import game_state
-from view import draw_canvas
-
-m_resposta = []
 
 # Dicionário com constantes relacionadas a cada dificuldade
 valores_dif = {
@@ -26,25 +22,25 @@ def compara_tentativa(tentativa):
     """Compara a tentativa do jogador com a senha e cria uma resposta que será retornada."""
 
     senha = game_state.estado["senha"].copy()
-    m_resposta = []
+    resposta = []
 
     game_state.estado["tentativas"].append(tentativa[:])
 
     for pos, pedra in enumerate(tentativa):
         if senha[pos] == pedra:
-            m_resposta.append("*")
+            resposta.append("*")
             senha[pos] = -1
             tentativa[pos] = -2
 
     for pos, pedra in enumerate(tentativa):
         if pedra in senha:
-            m_resposta.append("#")
+            resposta.append("#")
             senha[senha.index(pedra)] = -1
             tentativa[pos] = -2
 
-    game_state.estado["respostas"].append(m_resposta[:])
+    game_state.estado["respostas"].append(resposta[:])
 
-    return m_resposta
+    return resposta
 
 # Checa o estado atual do jogo, se acabou (em vitória ou derrota) ou não
 def testa_tentativa():
@@ -72,25 +68,4 @@ def get_valorDif(valor):
     if game_state.estado["dificuldade"] is None:
         return -1
     return valores_dif[game_state.estado["dificuldade"]][valor]
-
-# Carregar/Salvar estado do jogo
-
-def salvar():
-    """Salva o atual estado de uma partida em um arquivo json que pode ser carregado
-    para continuar de onde o jogador parou."""
-    if not game_state.estado is None:
-        fp = open("partida_mm.json", "w")
-        json.dump(game_state.estado, fp)
-        fp.close()
-
-
-def carregar():
-    """Carrega a partida salva em um arquivo json."""
-    global m_resposta
-    fp = open("partida_mm.json", "r")
-    game_state.estado = json.load(fp)
-    fp.close()
-
-    m_resposta = []
-
 

@@ -1,4 +1,4 @@
-__all__ = ["click_event", "esc_event", "load_event"]
+__all__ = ['click_event', 'esc_event', 'load_event', 'njogo']
 
 from model import game_rules
 from model import game_state
@@ -13,7 +13,7 @@ def esc_event(event):
     draw_canvas.draw()
 
 def load_event():
-    game_rules.carregar()
+    game_state.carregar()
     draw_canvas.draw()
 
 def click(event):
@@ -48,4 +48,22 @@ def click(event):
 
         if game_state.estado["cor_selecionada"] != -1:
             game_state.estado["cor_selecionada"] = -1
+
+def njogo_facil():
+    game_state.nova_partida(0)
+    draw_canvas.draw()
+
+def njogo_medio():
+    game_state.nova_partida(1)
+    draw_canvas.draw()
+
+def njogo_dificil():
+    game_state.nova_partida(2)
+    draw_canvas.draw()
+
+njogo = {
+    "facil": njogo_facil,
+    "medio": njogo_medio,
+    "dificil": njogo_dificil
+}
 

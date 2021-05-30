@@ -6,19 +6,6 @@ from model import game_rules
 from model import game_state
 from controller import event_handler
 
-def njogo_facil():
-    game_state.nova_partida(0)
-    draw_canvas.draw()
-
-def njogo_medio():
-    game_state.nova_partida(1)
-    draw_canvas.draw()
-
-def njogo_dificil():
-    game_state.nova_partida(2)
-    draw_canvas.draw()
-
-
 root = tkinter.Tk(className="Mastermind")
 root.geometry("745x700")
 root.resizable(False, False)
@@ -32,13 +19,13 @@ draw_canvas.draw()
 menu=tkinter.Menu(root)
 
 partida=tkinter.Menu(menu)
-partida.add_command(label="Salvar", command=game_rules.salvar)
+partida.add_command(label="Salvar", command=game_state.salvar)
 partida.add_command(label="Carregar", command=event_handler.load_event)
 
 nova_partida=tkinter.Menu(menu)
-nova_partida.add_command(label="Fácil", command=njogo_facil)
-nova_partida.add_command(label="Médio", command=njogo_medio)
-nova_partida.add_command(label="Difícil", command=njogo_dificil)
+nova_partida.add_command(label="Fácil", command=event_handler.njogo["facil"])
+nova_partida.add_command(label="Médio", command=event_handler.njogo["medio"])
+nova_partida.add_command(label="Difícil", command=event_handler.njogo["dificil"])
 
 menu.add_cascade(label="Nova Partida...", menu=nova_partida)
 menu.add_cascade(label="Partida...", menu=partida)
