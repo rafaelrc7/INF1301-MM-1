@@ -1,3 +1,7 @@
+"""
+Módulo do pacote controller que recebe e trata dos eventos do jogo, principalmente
+cliques na tela.
+"""
 __all__ = ['click_event', 'esc_event', 'load_event', 'njogo']
 
 from model import game_rules
@@ -5,18 +9,29 @@ from model import game_state
 from view import draw_canvas
 
 def click_event(event):
+    """Recebe evento de click e chama a função que trata dos cliques, depois
+    redesenha a tela."""
     click(event)
     draw_canvas.draw()
 
+
 def esc_event(event):
+    """Recebe e trata o evento de quando o jogador apertar esc e então redesenha
+    a tela."""
     game_state.estado["cor_selecionada"] = -1
     draw_canvas.draw()
 
+
 def load_event():
+    """Recebe e trata o evento de quando o jogador quer carregar uma partida
+    e então redesenha a tela."""
     game_state.carregar()
     draw_canvas.draw()
 
+
 def click(event):
+    """Função principal do módulo que trata dos eventos de clique na tela,
+    tratando de acordo com o lugar do clique e estado atual do jogo."""
     x=event.x
     y=event.y
 
@@ -49,17 +64,21 @@ def click(event):
         if game_state.estado["cor_selecionada"] != -1:
             game_state.estado["cor_selecionada"] = -1
 
+
 def njogo_facil():
     game_state.nova_partida(0)
     draw_canvas.draw()
+
 
 def njogo_medio():
     game_state.nova_partida(1)
     draw_canvas.draw()
 
+
 def njogo_dificil():
     game_state.nova_partida(2)
     draw_canvas.draw()
+
 
 njogo = {
     "facil": njogo_facil,

@@ -1,3 +1,7 @@
+"""
+Módulo do pacote Model responsável por guardar o estado do jogo e cuidar do
+processo de salvar/carregar.
+"""
 __all__ = ['estado', 'nova_partida', 'get_qtd_jogadas', 'carregar', 'salvar']
 
 import json
@@ -15,7 +19,7 @@ estado = {
 
 def nova_partida(dificuldade):
     """Define a dificuldade atual de acordo com o argumento recebido e inicia
-    uma partida nova"""
+    uma partida nova, reiniciando o estado do jogo de acordo."""
     global estado
 
     estado.update (
@@ -30,11 +34,12 @@ def nova_partida(dificuldade):
 
     game_rules.gen_senha()
 
+
 def get_qtd_jogadas():
+    """Calcula a quantidade de jogadas já feitas e retorna o número."""
     global estado
     return len(estado["tentativas"])
 
-# Carregar/Salvar estado do jogo
 
 def salvar():
     """Salva o atual estado de uma partida em um arquivo json que pode ser carregado

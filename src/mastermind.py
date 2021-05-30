@@ -2,7 +2,6 @@
 
 import tkinter
 from view import draw_canvas
-from model import game_rules
 from model import game_state
 from controller import event_handler
 

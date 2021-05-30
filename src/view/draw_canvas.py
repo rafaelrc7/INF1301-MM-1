@@ -1,3 +1,8 @@
+"""
+Módulo único do pacote view.
+Responsável por desenhar a tela do jogo.
+"""
+
 __all__ = ['inicia', 'draw']
 
 from controller import event_handler
@@ -21,11 +26,19 @@ m_cores = {
 }
 
 def inicia(canvas):
+    """
+    Função simples que inicializa o pacote view. Recebe e guarda o canvas
+    criado na inicialização do programa.
+    """
     global cnv
     cnv = canvas
-    return
+
 
 def draw():
+    """
+    Função que efetivamente desenha o tabuleiro e seus conteúdos na tela.
+    Antes de desenhar, a função apaga a tela e redesenha o tabuleiro.
+    """
     global cnv, m_cores
 
     cnv.delete("all")

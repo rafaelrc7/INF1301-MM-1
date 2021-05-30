@@ -1,3 +1,7 @@
+""""
+Módulo do pacote Model responsável pelas regras do jogo. Aqui é implementado
+a parte lógica do funcionamento do jogo.
+"""
 __all__ = ['gen_senha', 'compara_tentativa', 'testa_tentativa', 'get_valorDif']
 
 from random import randint
@@ -10,16 +14,16 @@ valores_dif = {
     2: {"pedras": 6, "cores": 8, "limite": 12}
 }
 
-# Gera uma senha aleatoriamente, de acordo com a dificuldade definida
 def gen_senha():
     """Gera uma senha com tamanho e cores de acordo com a atual dificuldade."""
 
     for i in range(valores_dif[game_state.estado["dificuldade"]]["pedras"]):
         game_state.estado["senha"].append(randint(0, valores_dif[game_state.estado["dificuldade"]]["cores"]-1))
 
-# Compara a tentiva do jogador com a senha atual, retornando uma lista com as pedras resposta
+
 def compara_tentativa(tentativa):
-    """Compara a tentativa do jogador com a senha e cria uma resposta que será retornada."""
+    """Compara a tentativa do jogador, recebida como parâmetro, com a senha e
+    cria uma resposta que será retornada e guardada no estado do jogo."""
 
     senha = game_state.estado["senha"].copy()
     resposta = []
@@ -42,9 +46,10 @@ def compara_tentativa(tentativa):
 
     return resposta
 
-# Checa o estado atual do jogo, se acabou (em vitória ou derrota) ou não
+
 def testa_tentativa():
-    """Testa se a partida acabou e, no caso, se o jogador perdeu ou ganhou."""
+    """Testa se a partida acabou e, no caso, se o jogador perdeu ou ganhou e
+    então atualiza o estado do jogo."""
 
     if game_state.estado["respostas"][-1] == ['*']*valores_dif[game_state.estado["dificuldade"]]["pedras"]:
         return -1
@@ -54,7 +59,6 @@ def testa_tentativa():
 
     return 1
 
-# 'Getters'
 
 def get_valorDif(valor):
     """Retorna um dos valores de regra relacionados à dificuldade atual.
