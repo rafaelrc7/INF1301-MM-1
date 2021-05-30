@@ -1,3 +1,5 @@
+__all__ = ["inicia", "draw"]
+
 from controller import event_handler
 from model import game_rules
 from model import game_state

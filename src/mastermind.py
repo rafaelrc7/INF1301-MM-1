@@ -27,6 +27,7 @@ root.resizable(False, False)
 
 canvas = tkinter.Canvas(root, bg="#c58561", width=745, height=700)
 canvas.bind('<ButtonRelease-1>', event_handler.click_event)
+canvas.bind('<Escape>', event_handler.esc_event)
 draw_canvas.inicia(canvas)
 draw_canvas.draw()
 
@@ -45,5 +46,6 @@ menu.add_cascade(label="Nova Partida...", menu=nova_partida)
 menu.add_cascade(label="Partida...", menu=partida)
 root.configure(menu=menu)
 
+canvas.focus_set()
 canvas.pack()
 root.mainloop()

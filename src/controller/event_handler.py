@@ -1,9 +1,15 @@
+__all__ = ["click_event", "esc_event", "load_event"]
+
 from model import game_rules
 from model import game_state
 from view import draw_canvas
 
 def click_event(event):
     click(event)
+    draw_canvas.draw()
+
+def esc_event(event):
+    game_state.estado["cor_selecionada"] = -1
     draw_canvas.draw()
 
 def load_event():
