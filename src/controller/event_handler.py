@@ -35,7 +35,9 @@ def click(event):
     x=event.x
     y=event.y
 
-    if (game_state.estado["partida"] > 0):
+    if (game_state.estado["partida"] > 0): # Checa se partida esta em progresso
+        # Checa se click aconteceu na paleta, se sim muda a cor selecionada para
+        # qual foi clicada. Apenas cores disponiveis na dificuldade sao selecionaveis
         if x > 507 and x < 507+2*87 and y > 42 and y < 42 + 87*4:
             for i in range(2): # coluna
                 for j in range(4): # linha
@@ -46,6 +48,8 @@ def click(event):
                         game_state.estado["cor_selecionada"] = c
                         return
 
+        # Se uma cor estiver selecionada e o jogador clicar numa posicao da
+        # tentativa atual, atualiza.
         yf = (11-game_state.get_qtd_jogadas()) * 53 + 65+8
         if game_state.estado["cor_selecionada"] != -1 and y > yf and y < yf+87:
             for i in range(game_rules.get_valorDif("pedras")):
@@ -54,6 +58,10 @@ def click(event):
                     game_state.estado["tentativa_tmp"][i] = game_state.estado["cor_selecionada"]
                     break
 
+        # Se todas as cores suficientes para a tentativa forem selecionadas, o
+        # botao para a avançar o jogo eh ativado. Aqui checa se o player clicou
+        # nele. Se sim, a tentativa atual é testada, o jogo avança e a tentativa
+        # é zerada novamente.
         if not -1 in game_state.estado["tentativa_tmp"][:game_rules.get_valorDif("pedras")]:
             if x > 507 and x < 2*87+507 and y > 348+42+10 and 348+42+87:
                 game_rules.compara_tentativa(game_state.estado["tentativa_tmp"][:game_rules.get_valorDif("pedras")])
@@ -61,6 +69,7 @@ def click(event):
                 game_state.estado["partida"] = game_rules.testa_tentativa()
 
 
+        # Reseta a cor selecionada para nenhuma.
         if game_state.estado["cor_selecionada"] != -1:
             game_state.estado["cor_selecionada"] = -1
 
