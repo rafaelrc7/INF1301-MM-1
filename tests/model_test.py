@@ -183,11 +183,11 @@ class Test_nova_partida(unittest.TestCase):
         game_state.nova_partida(0)
         self.assertEqual(game_state.estado["dificuldade"], 0)
 
-    def test_nova_partida_facil(self):
+    def test_nova_partida_medio(self):
         game_state.nova_partida(1)
         self.assertEqual(game_state.estado["dificuldade"], 1)
 
-    def test_nova_partida_facil(self):
+    def test_nova_partida_dificil(self):
         game_state.nova_partida(2)
         self.assertEqual(game_state.estado["dificuldade"], 2)
 
