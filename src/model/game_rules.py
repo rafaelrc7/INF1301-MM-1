@@ -16,7 +16,6 @@ valores_dif = {
 
 def gen_senha():
     """Gera uma senha com tamanho e cores de acordo com a atual dificuldade."""
-
     for i in range(valores_dif[game_state.estado["dificuldade"]]["pedras"]):
         game_state.estado["senha"].append(randint(0, valores_dif[game_state.estado["dificuldade"]]["cores"]-1))
 
