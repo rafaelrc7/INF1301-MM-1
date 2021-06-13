@@ -57,7 +57,8 @@ def draw():
 
         # Desenha os retangulos das pedras de tentativa e de resposta
         cnv.create_rectangle(65, (i*53)+6, 65+313, ((i+1)*53)+6, fill=cor)
-        cnv.create_rectangle(65+315, (i*53)+6, 65+315+65, ((i+1)*53)+6, fill='')
+        if (i > 0): # Senha não possui resposta
+            cnv.create_rectangle(65+315, (i*53)+6, 65+315+65, ((i+1)*53)+6, fill='')
 
         # Bloco que desenha as pedras. Apenas pedras de tentativas possiveis,
         # da senha e pedras resposta são desenhadas.
@@ -81,11 +82,16 @@ def draw():
                     # Tentativa passada, recuperamos as cores da tentativa passade e também desenhamos as pedras de resposta
                     else:
                         cor = m_cores[game_state.estado["tentativas"][abs(i-12)][j]]
-                        for x in range(len(game_state.estado["respostas"][abs(i-12)])):
-                            r_cor = m_cores[game_state.estado["respostas"][abs(i-12)][x]]
-                            cnv.create_oval(65+317+(x%3)*20, i*53+12+(x//3)*20, 65+337+(x%3)*20, i*53+12+(x//3)*20+20, fill=r_cor)
 
                     cnv.create_oval((j*53)+65+8, (i*53)+6+10, (j*53)+65+53-10, (i*53)+6+53-10, fill=cor)
+
+            if i > 12 - game_rules.get_valorDif("limite"):
+                for x in range(game_rules.get_valorDif("pedras")):
+                    if i > 12-game_state.get_qtd_jogadas() and x < len(game_state.estado["respostas"][abs(i-12)]):
+                        cor = m_cores[game_state.estado["respostas"][abs(i-12)][x]]
+                    else:
+                        cor = ''
+                    cnv.create_oval(65+317+(x%3)*20, i*53+12+(x//3)*20, 65+337+(x%3)*20, i*53+12+(x//3)*20+20, fill=cor)
 
     # paleta de seleção
     for i in range(2): # coluna
