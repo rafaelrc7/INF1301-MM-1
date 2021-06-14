@@ -1,3 +1,6 @@
+# Caio Coutinho Palmieri
+# Gustavo Zalcman
+# Rafael Ribeiro de Carvalho
 """
 Módulo do pacote Model responsável por guardar o estado do jogo e cuidar do
 processo de salvar/carregar.

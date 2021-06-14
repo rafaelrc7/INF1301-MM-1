@@ -1,3 +1,6 @@
+# Caio Coutinho Palmieri
+# Gustavo Zalcman
+# Rafael Ribeiro de Carvalho
 """
 Módulo único do pacote view.
 Responsável por desenhar a tela do jogo.

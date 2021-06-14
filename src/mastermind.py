@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+# Caio Coutinho Palmieri
+# Gustavo Zalcman
+# Rafael Ribeiro de Carvalho
+
 import tkinter
 from view import draw_canvas
 from model import game_state

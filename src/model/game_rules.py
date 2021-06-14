@@ -1,4 +1,7 @@
-""""
+# Caio Coutinho Palmieri
+# Gustavo Zalcman
+# Rafael Ribeiro de Carvalho
+"""
 Módulo do pacote Model responsável pelas regras do jogo. Aqui é implementado
 a parte lógica do funcionamento do jogo.
 """

@@ -1,3 +1,6 @@
+# Caio Coutinho Palmieri
+# Gustavo Zalcman
+# Rafael Ribeiro de Carvalho
 """
 Módulo do pacote controller que recebe e trata dos eventos do jogo, principalmente
 cliques na tela.
